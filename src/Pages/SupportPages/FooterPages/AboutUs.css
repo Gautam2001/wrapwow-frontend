@@ -1,0 +1,76 @@
+.aboutus-page {
+  background-color: #fdfdfd;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.aboutus-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+.aboutus-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1c1ce1;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.aboutus-tagline {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.aboutus-section {
+  margin-bottom: 35px;
+}
+
+.aboutus-section h2 {
+  font-size: 1.5rem;
+  color: #1e1e2f;
+  margin-bottom: 12px;
+}
+
+.aboutus-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.aboutus-section ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.aboutus-section ul li {
+  margin-bottom: 8px;
+  list-style: disc;
+  color: #333;
+}
+
+.aboutus-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.aboutus-tech > div {
+  flex: 1;
+  min-width: 250px;
+}
+
+.aboutus-tech h4 {
+  font-size: 1.2rem;
+  color: #1c1ce1;
+  margin-bottom: 10px;
+}

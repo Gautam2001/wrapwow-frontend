@@ -1,0 +1,157 @@
+.uh-page {
+  background-color: #1b1a1a;
+  padding: 12px 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.uh-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uh-error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b00020;
+}
+
+.uh-col1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.uh-brand-img {
+  height: 50px;
+  object-fit: contain;
+}
+
+.uh-subtitle {
+  color: #f1f3f5;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.uh-col2 {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.uh-cart-container {
+  position: relative;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.uh-cart-icon {
+  font-size: 20px;
+  color: #f8f9fa;
+  transition: transform 0.2s;
+}
+
+.uh-cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.uh-cart-badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.uh-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background-color: #f1f3f5;
+  padding: 8px 20px;
+  border-radius: 20px;
+  min-width: 100px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.uh-user:hover {
+  background-color: #e9ecef;
+}
+
+.uh-name {
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+}
+
+.uh-icon {
+  font-size: 16px;
+  color: #007bff;
+}
+
+/* Dropdown */
+.uh-dropdown {
+  position: absolute;
+  top: 75px;
+  right: 40px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 160px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.uh-dropdown p {
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.uh-dropdown p:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .uh-name {
+    display: none;
+  }
+
+  .uh-user {
+    padding: 6px;
+  }
+
+  .uh-brand-img {
+    height: 36px;
+  }
+
+  .uh-col2 {
+    gap: 12px;
+  }
+
+  .uh-subtitle {
+    display: none;
+  }
+}

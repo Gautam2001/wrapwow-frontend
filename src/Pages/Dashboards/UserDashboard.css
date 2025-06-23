@@ -1,0 +1,330 @@
+/* ----------------- PAGE & CONTAINER ----------------- */
+
+.ud-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: #f8f8f8;
+}
+
+.ud-container {
+  width: 85%;
+  margin: 15px auto;
+  box-sizing: border-box;
+}
+
+/* ----------------- ERROR ----------------- */
+
+.ud-error {
+  color: #e74c3c;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ----------------- CAROUSEL ----------------- */
+
+.ud-carousel-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ----------------- CATEGORIES ----------------- */
+
+.ud-categories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 0 0;
+  gap: 15px 10px;
+  margin: auto;
+}
+
+.ud-category-card {
+  width: 24.2%;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ud-category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.ud-category-button {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  border: none;
+  width: 100%;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.ud-category-image {
+  width: 100%;
+  height: 130px;
+  border-radius: 8px 8px 0 0;
+  object-fit: fill;
+}
+
+.ud-category-name {
+  margin: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* ----------------- ADVERTISEMENTS ----------------- */
+
+.ud-advert {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0.5rem auto;
+}
+
+.ud-advert-img-div {
+  width: 49.5%;
+  min-width: 300px;
+}
+
+.ud-advert-image {
+  width: 100%;
+  height: 280px;
+  object-fit: fill;
+  border-radius: 8px;
+}
+
+/* ----------------- PRODUCTS SECTION ----------------- */
+
+.ud-products {
+  padding: 1rem 0 0 0;
+  margin: 2rem 0;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.ud-product {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 0 2rem 1rem 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.ud-product-heading {
+  max-width: 600px;
+}
+
+.ud-product-heading-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0.5rem 0;
+}
+
+.ud-product-heading-desc {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+.ud-product-button {
+  background-color: #4a90e2;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ud-product-button:hover {
+  background-color: #357ac9;
+}
+
+/* ----------------- PRODUCT CARDS ----------------- */
+
+.ud-products-card {
+  width: 100%;
+  min-height: 320px;
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  
+}
+
+.ud-product-card {
+  flex: 0 0 18.8%;
+  min-width: 160px;
+  height: 285px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ud-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ud-products-image-container {
+  width: 100%;
+}
+
+.ud-products-image {
+  width: 100%;
+  height: 140px;
+  object-fit: fill;
+  border-radius: 10px 10px 0 0;
+}
+
+.ud-products-placeholder img {
+  background-color: #e0e0e0;
+  object-fit: contain;
+}
+
+.ud-products-info-conatiner {
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.ud-products-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 12px 0 6px 0;
+}
+
+.ud-products-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0 0 3px 0;
+}
+
+.ud-products-price {
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.ud-products-buy-now {
+  color: #275fbb;
+  width: 100%;
+  margin: 0;
+  padding: 5px 10px 10px 0;
+  font-size: smaller;
+  text-align: right;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+/* ----------------- SLICK DOTS (if using carousel) ----------------- */
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #999;
+  margin-top: -8px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #2874f0;
+}
+
+/* ----------------- RESPONSIVE BREAKPOINTS ----------------- */
+
+@media (max-width: 1024px) {
+  .ud-category-card {
+    width: 30%;
+  }
+
+  .ud-advert-img-div {
+    width: 100%;
+  }
+
+  .ud-card {
+    flex: 0 0 22%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ud-category-card {
+    width: 45%;
+  }
+
+  .ud-product {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ud-product-button {
+    align-self: flex-start;
+  }
+
+  .ud-products-card {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-height: none;
+  }
+
+  .ud-card {
+    flex: 0 0 65%;
+  }
+
+  .ud-products-card::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .ud-products-card::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ud-category-card {
+    width: 100%;
+  }
+
+  .ud-product-heading-title {
+    font-size: 1.5rem;
+  }
+
+  .ud-product-heading-desc {
+    font-size: 1rem;
+  }
+
+  .ud-card {
+    flex: 0 0 80%;
+  }
+}

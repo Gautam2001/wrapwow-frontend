@@ -1,0 +1,51 @@
+.sf-page {
+  width: 20%;
+  min-width: 125px;
+  max-width: 210px;
+  background-color: #ffffff;
+  padding: 10px 0 0 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  font-family: 'Segoe UI', sans-serif;
+  position: sticky;
+  height: 480px;
+  top: 0;
+}
+
+.sf-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.sf-container {
+  margin-bottom: 12px;
+}
+
+.sf-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.sf-label:hover {
+  color: #007BFF;
+}
+
+.sf-input {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  accent-color: #007BFF; 
+  cursor: pointer;
+}
+
+.sf-cat-name {
+  user-select: none;
+}

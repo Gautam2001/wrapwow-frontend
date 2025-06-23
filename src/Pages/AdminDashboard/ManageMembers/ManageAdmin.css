@@ -1,0 +1,243 @@
+.ma-page {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f5f7fa;
+  box-sizing: border-box;
+}
+
+.ma-container {
+  width: 80%;
+  margin: 20px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 35px;
+  box-sizing: border-box;
+}
+
+.ma-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: left;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.ma-searchbar-container {
+  width: 96%;
+  margin: 10px 0 20px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.ma-searchbar {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fc;
+  transition: border 0.3s;
+}
+
+.ma-searchbar:focus {
+  border-color: #2980b9;
+  background-color: #fff;
+  outline: none;
+}
+
+.ma-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.ma-top-btn {
+  padding: 8px 16px;
+  background-color: #1c1ce1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 18%;
+  margin-top: 10px;
+}
+
+.ma-admin-header,
+.ma-admin-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.ma-admin-header {
+  font-weight: 700;
+  background-color: #374048;
+  color: whitesmoke;
+}
+
+.ma-checkbox {
+  width: 5%;
+  text-align: center;
+}
+
+.ma-header-name,
+.ma-admin-name {
+  width: 20%;
+  padding: 5px 10px;
+}
+
+.ma-header-email,
+.ma-admin-email {
+  width: 30%;
+  padding: 5px 10px;
+  word-wrap: break-word;
+}
+
+.ma-header-dob,
+.ma-admin-dob {
+  width: 15%;
+  padding: 5px 10px;
+}
+
+.ma-header-status,
+.ma-admin-status {
+  width: 15%;
+  padding: 5px 10px;
+}
+
+.ma-header-action,
+.ma-admin-action {
+  width: 15%;
+  text-align: center;
+}
+
+.ma-action-btn {
+  padding: 8px 16px;
+  background-color: #1c1ce1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ma-action-btn:hover {
+  background-color: #0e0e91;
+}
+
+.ma-sort-icon {
+  margin-left: 6px;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.ma-sort-icon.active {
+  color: #1c1ce1;
+}
+
+.ma-error {
+  color: #e74c3c;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .ma-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .ma-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .ma-admin-header,
+  .ma-admin-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .ma-checkbox,
+  .ma-header-name,
+  .ma-header-email,
+  .ma-header-dob,
+  .ma-header-status,
+  .ma-header-action,
+  .ma-admin-name,
+  .ma-admin-email,
+  .ma-admin-dob,
+  .ma-admin-status,
+  .ma-admin-action {
+    width: 100%;
+    text-align: left;
+  }
+
+  .ma-action-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ma-title {
+    font-size: 22px;
+  }
+
+  .ma-admin-header,
+  .ma-admin-card {
+    padding: 12px 15px;
+  }
+
+  .ma-searchbar {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .ma-admin-header {
+    font-size: 14px;
+  }
+
+  .ma-header-name,
+  .ma-header-email,
+  .ma-header-dob,
+  .ma-header-status,
+  .ma-header-action,
+  .ma-admin-name,
+  .ma-admin-email,
+  .ma-admin-dob,
+  .ma-admin-status,
+  .ma-admin-action {
+    font-size: 14px;
+    padding: 8px 10px;
+    word-wrap: break-word;
+  }
+
+  .ma-action-btn {
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 10px;
+  }
+}

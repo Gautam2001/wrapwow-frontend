@@ -1,0 +1,289 @@
+/* Layout and Structure */
+.ct-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f9f9f9;
+  overflow-y: scroll;
+}
+
+.ct-container {
+  flex: 1;
+  padding: 30px 60px;
+  width: 80%;
+  margin: auto;
+}
+
+.ct-title {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 0;
+  color: #222;
+}
+
+/* Error / Empty Cart */
+.ct-error,
+.ct-empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b00020;
+}
+
+/* Cart Items Container */
+.ct-cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Cart Item */
+.ct-cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  max-height: 135px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Left: Image + Name */
+.ct-item-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 30%;
+  min-width: 250px;
+}
+
+.ct-product-image {
+  width: 135px;
+  height: 110px;
+  object-fit: fill;
+  border-radius: 10px;
+  background: #f0f0f0;
+}
+
+.ct-product-name {
+  font-size: large;
+  margin: 5px;
+}
+
+.ct-product-category {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 5px;
+}
+
+/* Center Info Blocks */
+.ct-item-center {
+  display: flex;
+  /* gap: 10px; */
+  width: 70%;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.ct-info-block {
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  width: 50px;
+  max-width: 110px;
+}
+
+.ct-info-block label {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.ct-info-block span {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Original price */
+.ct-original-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 0.8rem;
+}
+
+.ct-discount {
+  display: inline;
+  font-size: 0.8rem;
+  margin: 0;
+  margin-top: 5px;
+}
+
+/* Quantity Controls */
+.ct-quantity-select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.ct-quantity-select:focus {
+  border-color: #888;
+  outline: none;
+}
+
+/* Delete Button */
+.ct-actions {
+  display: flex;
+  align-items: center;
+}
+
+.ct-delete-btn {
+  margin-right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #cc0000;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.ct-delete-btn:hover {
+  color: #a00000;
+}
+
+/* Billing Summary */
+.ct-billing-summary {
+  margin-top: 20px;
+  background: #cdb9b9;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 35%;
+  max-width: 40%;
+  margin-left: auto;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.ct-billing-summary h3 {
+  margin: 0;
+}
+
+.ct-billing-summary p {
+  margin: 10px 0;
+  color: #444;
+}
+
+.ct-grand-total {
+  font-size: 1.2rem;
+  color: #111;
+}
+
+.ct-checkout-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.ct-checkout-btn:hover {
+  background-color: #0059c1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ct-container {
+    padding: 20px 20px;
+    width: 80%;
+  }
+
+  .ct-cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: none;
+  }
+
+  .ct-item-left,
+  .ct-item-center {
+    width: 100%;
+  }
+
+  .ct-info-block {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .ct-actions {
+    margin-top: 10px;
+    align-self: flex-end;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .ct-billing-summary {
+    width: 60%;
+    max-width: 100%;
+    margin-top: 30px;
+    text-align: right;
+  }
+}
+
+/* Responsive for mobile phones */
+@media (max-width: 480px) {
+  .ct-container {
+    padding: 15px 10px;
+  }
+
+  .ct-title {
+    font-size: 1.6rem;
+  }
+
+  .ct-product-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .ct-product-name {
+    font-size: 1rem;
+  }
+
+  .ct-info-block {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    margin-bottom: 10px;
+  }
+
+  .ct-checkout-btn {
+    font-size: 0.95rem;
+    padding: 10px 16px;
+  }
+
+  .ct-billing-summary {
+    padding: 20px 15px;
+    text-align: right;
+  }
+
+  .ct-billing-summary h3 {
+    font-size: 1.1rem;
+  }
+
+  .ct-billing-summary p,
+  .ct-grand-total {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,128 @@
+.lf-page {
+  background-color: #1b1a1a;
+  padding: 30px 20px 10px;
+  color: #e0e0e0;
+  font-family: "Segoe UI" sans-serif;
+}
+
+.lf-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.lf-brand {
+  flex: 1;
+  text-align: center;
+}
+
+.lf-logo-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.lf-tagline {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.lf-branding {
+  font-size: 16px;
+  color: #e1e1e1;
+}
+
+.lf-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 55px;
+  flex-wrap: wrap;
+}
+
+.lf-link {
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lf-link:hover {
+  color: #00bcd4;
+}
+
+.lf-social {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.lf-logo-img {
+  width: 110px;
+  height: auto;
+  margin-bottom: 20px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.lf-social-icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.lf-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  color: #1e1e2f;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.lf-icon-link:hover {
+  background-color: #1e1e2f;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.lf-bottom-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .lf-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lf-links {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .lf-social {
+    margin-top: 15px;
+  }
+}

@@ -1,0 +1,13 @@
+.vp-page {
+  width: 100%;
+  height: 100vh;
+  background-color: #efefef;
+  /* box-sizing: border-box; */
+  overflow-y: scroll;
+}
+
+.vp-container {
+  display: flex;
+  width: 100%;
+}
+
