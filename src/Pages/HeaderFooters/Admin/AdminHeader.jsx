@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import BrandLogo from "../../../Assets/GiftersLogoW.png";
-import "./adminHeader.css";
+import "./AdminHeader.css";
 import { useNavigate } from "react-router-dom";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 
