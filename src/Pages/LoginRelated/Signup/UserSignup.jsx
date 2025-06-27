@@ -108,7 +108,15 @@ const UserSignup = () => {
         // navigate("/login");
       }
     } catch (err) {
-      console.error("Signup error:", err); // LOG 5
+      console.error("Signup error:", err);
+      if (err.response) {
+        console.error("Response error data:", err.response.data);
+        console.error("Response error status:", err.response.status);
+      } else if (err.request) {
+        console.error("No response received:", err.request);
+      } else {
+        console.error("Error setting up request:", err.message);
+      }
       showPopup("Signup failed. Please try again.", "error");
     }
   };
