@@ -72,8 +72,9 @@ const UserSignup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    console.log("Form submission started", form);
     const errors = validateFields();
-
+    console.log("Validation errors:", errors);
     if (errors.length > 0) {
       showPopup(errors[0], "error");
       return;
@@ -85,7 +86,11 @@ const UserSignup = () => {
             form.dob.split("-")[0]
           }`
         : "";
-
+      console.log("Sending signup request", {
+        ...form,
+        dob: formattedDOB,
+        role: "USER",
+      }); // LOG 3
       const response = await AxiosInstance.post("/member/signup", {
         ...form,
         dob: formattedDOB,
@@ -93,14 +98,15 @@ const UserSignup = () => {
       });
 
       const result = response.data.resultString;
-
+      console.log("Signup result:", result); // LOG 4
       if (result.resultStatus === "0") {
         showPopup(result.result || "Signup failed", "error");
       } else {
         showPopup(result.result || "Signup successful", "success");
         navigate("/login");
       }
-    } catch {
+    } catch (err) {
+      console.error("Signup error:", err); // LOG 5
       showPopup("Signup failed. Please try again.", "error");
     }
   };
