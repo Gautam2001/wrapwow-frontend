@@ -6,10 +6,10 @@
   padding: 10px 0 0 20px;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
   border-radius: 8px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   position: sticky;
   height: 480px;
-  top: 0;
+  top: 100px;
 }
 
 .sf-title {
@@ -35,14 +35,14 @@
 }
 
 .sf-label:hover {
-  color: #007BFF;
+  color: #007bff;
 }
 
 .sf-input {
   margin-right: 10px;
   width: 16px;
   height: 16px;
-  accent-color: #007BFF; 
+  accent-color: #007bff;
   cursor: pointer;
 }
 

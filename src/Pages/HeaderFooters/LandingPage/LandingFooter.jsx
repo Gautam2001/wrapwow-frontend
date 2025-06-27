@@ -42,7 +42,7 @@ const LandingFooter = () => {
           />
           <div className="lf-social-icons">
             <a
-              href="mailto:gautamsinghal206@gmail.com"
+              href="mailto:singhal.gautam.gs@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
               className="lf-icon-link"

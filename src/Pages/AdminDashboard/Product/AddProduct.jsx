@@ -11,7 +11,7 @@ import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
 
 const AddProduct = () => {
   const navigate = useNavigate();
-  const { showPopup } = usePopup;
+  const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -215,7 +215,6 @@ const AddProduct = () => {
       } else {
         const productId = result.productId;
         await HandleImageAPI(productId, selectedFiles);
-        navigate("/admin-dashboard");
       }
     } catch {
       showPopup("Failed to add product. Try again.", "error");

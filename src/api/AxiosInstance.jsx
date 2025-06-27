@@ -3,7 +3,7 @@ import { usePopup } from "../Pages/GlobalFunctions/GlobalPopup/GlobalPopupContex
 
 const AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 40000,
+  timeout: 150000,
 });
 
 AxiosInstance.interceptors.request.use(

@@ -94,7 +94,7 @@ const PrivacyPolicy = () => {
           <h2>9. Contact Us</h2>
           <p>
             If you have any questions about this policy, please contact us at:{" "}
-            <a href="mailto:gautamsinghal206@gmail.com">support@wrapwow.com</a>
+            <a href="mailto:singhal.gautam.gs@gmail.com">support@wrapwow.com</a>
           </p>
         </section>
       </div>

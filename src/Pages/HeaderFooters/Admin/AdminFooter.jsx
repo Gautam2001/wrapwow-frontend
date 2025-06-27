@@ -42,7 +42,7 @@ const AdminFooter = () => {
           />
           <div className="af-social-icons">
             <a
-              href="mailto:gautamsinghal206@gmail.com"
+              href="mailto:singhal.gautam.gs@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
               className="af-icon-link"
