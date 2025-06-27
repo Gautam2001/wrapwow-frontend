@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaSignOutAlt, FaShoppingCart } from "react-icons/fa";
 import BrandLogo from "../../../Assets/GiftersLogoW.png";
-import "./userHeader.css";
+import "./UserHeader.css";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../../../api/AxiosInstance";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
