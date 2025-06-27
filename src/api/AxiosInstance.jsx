@@ -13,12 +13,11 @@ AxiosInstance.interceptors.request.use(
     const token = loginData?.token;
     const allowedUrls = [
       "member/landingPageData",
-      "/user/signup",
+      "/member/signup",
       "/member/login",
       "/member/sendOtp",
       "/member/validateOtp",
       "/member/forgotPassword",
-      "/images/**",
     ];
 
     if (!allowedUrls.some((url) => config.url.includes(url)) && !token) {
