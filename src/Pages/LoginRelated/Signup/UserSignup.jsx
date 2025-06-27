@@ -101,9 +101,11 @@ const UserSignup = () => {
       console.log("Signup result:", result); // LOG 4
       if (result.resultStatus === "0") {
         showPopup(result.result || "Signup failed", "error");
+        console.log(result.result || "Signup failed");
       } else {
         showPopup(result.result || "Signup successful", "success");
-        navigate("/login");
+        console.log(result.result || "Signup successful");
+        // navigate("/login");
       }
     } catch (err) {
       console.error("Signup error:", err); // LOG 5
