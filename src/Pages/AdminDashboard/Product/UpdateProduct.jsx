@@ -281,6 +281,7 @@ const UpdateProduct = () => {
     const finalPriceList = formData.prices.map((p) => parseFloat(p.finalPrice));
 
     try {
+      showLoader();
       const response = await AxiosInstance.post("/admin/updateProduct", {
         email,
         productId: formData.id,
@@ -300,6 +301,7 @@ const UpdateProduct = () => {
       } else {
         const productId = result.productId;
         if (addedImages.length === 0 && deletedImages.length === 0) {
+          hideLoader();
           navigate("/manage-products");
         } else {
           HandleImageAPI(productId);
