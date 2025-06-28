@@ -1,4 +1,4 @@
-.ad-page {
+.admin-dash-page {
   display: block;
   width: 100%;
   height: 100vh;
@@ -7,14 +7,14 @@
   box-sizing: border-box;
 }
 
-.ad-container {
+.admin-dash-container {
   display: block;
   margin: auto;
   width: 80%;
   box-sizing: border-box;
 }
 
-.ad-cards {
+.admin-dash-cards {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -23,7 +23,7 @@
   gap: 16px;
 }
 
-.ad-card {
+.admin-dash-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,12 +41,12 @@
   padding: 0px;
 }
 
-.ad-card:hover {
+.admin-dash-card:hover {
   transform: translateY(-6px);
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.ad-card-icon {
+.admin-dash-card-icon {
   font-size: 60px;
   margin: 0px;
   padding: 0;
@@ -54,20 +54,20 @@
   margin-top: 10px;
 }
 
-.ad-card-title {
+.admin-dash-card-title {
   font-size: 22px;
   font-weight: bold;
   margin: 6px 0;
   color: #222;
 }
 
-.ad-card-description {
+.admin-dash-card-description {
   font-size: 14px;
   color: #777;
   margin: 0px 10px 10px 10px;
 }
 
-.ad-info-wrapper {
+.admin-dash-info-wrapper {
   width: 100%;
   margin: 2rem 0;
   background-color: #ffffff;
@@ -77,7 +77,7 @@
   box-sizing: border-box;
 }
 
-.ad-info-title {
+.admin-dash-info-title {
   font-size: 1.8rem;
   font-weight: 700;
   color: #1f1f1f;
@@ -86,7 +86,7 @@
   text-align: center;
 }
 
-.ad-info-content {
+.admin-dash-info-content {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -95,7 +95,7 @@
   position: relative;
 }
 
-.ad-info-column {
+.admin-dash-info-column {
   flex: 1;
   padding: 0 1rem;
   display: flex;
@@ -104,7 +104,7 @@
   position: relative;
 }
 
-.ad-info-column:not(:last-child)::after {
+.admin-dash-info-column:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
@@ -114,7 +114,7 @@
   background-color: #ddd;
 }
 
-.ad-info-heading {
+.admin-dash-info-heading {
   font-size: 1.1rem;
   font-weight: 600;
   color: #4a90e2;
@@ -124,30 +124,30 @@
   padding-bottom: 0.5rem;
 }
 
-.ad-info {
+.admin-dash-info {
   display: flex;
   justify-content: space-around;
 }
 
-.ad-info-section {
+.admin-dash-info-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.ad-info-label {
+.admin-dash-info-label {
   font-size: 1rem;
   color: #666;
   margin-bottom: 0.3rem;
 }
 
-.ad-info-value {
+.admin-dash-info-value {
   font-size: 1.6rem;
   font-weight: 700;
   color: #333;
 }
 
-.ad-product {
+.admin-dash-product {
   padding: 2rem 2.5rem;
   background-color: #ffffff;
   border-radius: 12px;
@@ -161,20 +161,20 @@
   gap: 1.5rem;
 }
 
-.ad-product-heading-title {
+.admin-dash-product-heading-title {
   font-size: 2.2rem;
   font-weight: 700;
   color: #1f1f1f;
   margin: 0.5rem 0;
 }
 
-.ad-product-heading-desc {
+.admin-dash-product-heading-desc {
   font-size: 1.1rem;
   color: #555;
   margin: 0;
 }
 
-.ad-product-button {
+.admin-dash-product-button {
   background-color: #4a90e2;
   color: #fff;
   padding: 1rem 2.5rem;
@@ -190,12 +190,12 @@
   transition: all 0.3s ease;
 }
 
-.ad-product-button:hover {
+.admin-dash-product-button:hover {
   background-color: #357ac9;
   box-shadow: 0 6px 20px rgba(53, 122, 201, 0.35);
 }
 
-.ad-analytics-wrapper {
+.admin-dash-analytics-wrapper {
   width: 100%;
   background-color: #ffffff;
   border-radius: 12px;
@@ -205,7 +205,7 @@
   box-sizing: border-box;
 }
 
-.ad-analytics-title {
+.admin-dash-analytics-title {
   font-size: 1.8rem;
   font-weight: 700;
   color: #1f1f1f;
@@ -214,8 +214,7 @@
   text-align: center;
 }
 
-
-.ad-summary-cards {
+.admin-dash-summary-cards {
   display: flex;
   justify-content: space-between;
   gap: 24px;
@@ -224,7 +223,7 @@
   width: 100%;
 }
 
-.ad-summary-card {
+.admin-dash-summary-card {
   flex: 1;
   min-width: 31%;
   background: linear-gradient(145deg, #f0f0f0, #ffffff);
@@ -236,30 +235,30 @@
   box-sizing: border-box;
 }
 
-.ad-summary-card:hover {
+.admin-dash-summary-card:hover {
   transform: translateY(-4px);
 }
 
-.ad-summary-card .label {
+.admin-dash-summary-card .label {
   font-size: 0.95rem;
   color: #777;
   margin-bottom: 0.5rem;
 }
 
-.ad-summary-card .value {
+.admin-dash-summary-card .value {
   font-size: 1.8rem;
   font-weight: 700;
   color: #333;
 }
 
-.ad-graphs-container {
+.admin-dash-graphs-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 30px;
   width: 100%;
 }
 
-.ad-graph {
+.admin-dash-graph {
   background: #f9f9f9;
   padding: 1.5rem;
   border-radius: 12px;
@@ -268,11 +267,11 @@
   transition: box-shadow 0.2s ease;
 }
 
-.ad-graph:hover {
+.admin-dash-graph:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.ad-graph h3 {
+.admin-dash-graph h3 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -282,67 +281,67 @@
 }
 
 @media (max-width: 768px) {
-  .ad-container {
+  .admin-dash-container {
     width: 95%;
   }
 
-  .ad-cards {
+  .admin-dash-cards {
     flex-direction: column;
     align-items: center;
   }
 
-  .ad-card {
+  .admin-dash-card {
     width: 90%;
     height: auto;
     padding: 20px;
   }
 
-  .ad-card-icon {
+  .admin-dash-card-icon {
     font-size: 42px;
   }
 
-  .ad-card-title {
+  .admin-dash-card-title {
     font-size: 16px;
   }
 
-  .ad-card-description {
+  .admin-dash-card-description {
     font-size: 13px;
   }
 
-  .ad-info-content {
+  .admin-dash-info-content {
     flex-direction: column;
   }
 
-  .ad-info-column:not(:last-child)::after {
+  .admin-dash-info-column:not(:last-child)::after {
     display: none;
   }
 
-  .ad-info-column {
+  .admin-dash-info-column {
     border-bottom: 1px solid #ddd;
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .ad-product {
+  .admin-dash-product {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .ad-product-button {
+  .admin-dash-product-button {
     align-self: flex-start;
   }
 
-  .ad-summary-cards {
+  .admin-dash-summary-cards {
     flex-direction: column;
     align-items: center;
   }
 
-  .ad-summary-card {
+  .admin-dash-summary-card {
     width: 100%;
     max-width: 100%;
   }
 
-  .ad-graphs {
+  .admin-dash-graphs {
     width: 100%;
   }
 }

@@ -72,9 +72,8 @@ const UserSignup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("Form submission started", form);
     const errors = validateFields();
-    console.log("Validation errors:", errors);
+
     if (errors.length > 0) {
       showPopup(errors[0], "error");
       return;
@@ -86,11 +85,7 @@ const UserSignup = () => {
             form.dob.split("-")[0]
           }`
         : "";
-      console.log("Sending signup request", {
-        ...form,
-        dob: formattedDOB,
-        role: "USER",
-      }); // LOG 3
+
       const response = await AxiosInstance.post("/member/signup", {
         ...form,
         dob: formattedDOB,
@@ -98,25 +93,14 @@ const UserSignup = () => {
       });
 
       const result = response.data.resultString;
-      console.log("Signup result:", result); // LOG 4
+
       if (result.resultStatus === "0") {
         showPopup(result.result || "Signup failed", "error");
-        console.log(result.result || "Signup failed");
       } else {
         showPopup(result.result || "Signup successful", "success");
-        console.log(result.result || "Signup successful");
-        // navigate("/login");
+        navigate("/login");
       }
-    } catch (err) {
-      console.error("Signup error:", err);
-      if (err.response) {
-        console.error("Response error data:", err.response.data);
-        console.error("Response error status:", err.response.status);
-      } else if (err.request) {
-        console.error("No response received:", err.request);
-      } else {
-        console.error("Error setting up request:", err.message);
-      }
+    } catch {
       showPopup("Signup failed. Please try again.", "error");
     }
   };

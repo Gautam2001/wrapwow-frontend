@@ -15,40 +15,40 @@ import { useLoading } from "../GlobalFunctions/GlobalLoader/LoadingContext";
 Chart.register(...registerables);
 
 const Card = ({ icon, title, description, to }) => (
-  <Link to={to} className="ad-card">
-    <div className="ad-card-icon">{icon}</div>
-    <h3 className="ad-card-title">{title}</h3>
-    <p className="ad-card-description">{description}</p>
+  <Link to={to} className="admin-dash-card">
+    <div className="admin-dash-card-icon">{icon}</div>
+    <h3 className="admin-dash-card-title">{title}</h3>
+    <p className="admin-dash-card-description">{description}</p>
   </Link>
 );
 
 const AdminInfoCard = ({ stats }) => (
-  <div className="ad-info-wrapper">
-    <h2 className="ad-info-title">Website Status Overview</h2>
-    <div className="ad-info-content">
-      <div className="ad-info-column">
-        <div className="ad-info-heading">Products</div>
-        <div className="ad-info">
-          <div className="ad-info-section">
-            <div className="ad-info-label">Out of Stock</div>
-            <div className="ad-info-value">{stats.outOfStockQty}</div>
+  <div className="admin-dash-info-wrapper">
+    <h2 className="admin-dash-info-title">Website Status Overview</h2>
+    <div className="admin-dash-info-content">
+      <div className="admin-dash-info-column">
+        <div className="admin-dash-info-heading">Products</div>
+        <div className="admin-dash-info">
+          <div className="admin-dash-info-section">
+            <div className="admin-dash-info-label">Out of Stock</div>
+            <div className="admin-dash-info-value">{stats.outOfStockQty}</div>
           </div>
-          <div className="ad-info-section">
-            <div className="ad-info-label">Low on Stock</div>
-            <div className="ad-info-value">{stats.lowStockQty}</div>
+          <div className="admin-dash-info-section">
+            <div className="admin-dash-info-label">Low on Stock</div>
+            <div className="admin-dash-info-value">{stats.lowStockQty}</div>
           </div>
         </div>
       </div>
-      <div className="ad-info-column">
-        <div className="ad-info-heading">Members</div>
-        <div className="ad-info">
-          <div className="ad-info-section">
-            <div className="ad-info-label">Inactive Users</div>
-            <div className="ad-info-value">{stats.inactiveUsers}</div>
+      <div className="admin-dash-info-column">
+        <div className="admin-dash-info-heading">Members</div>
+        <div className="admin-dash-info">
+          <div className="admin-dash-info-section">
+            <div className="admin-dash-info-label">Inactive Users</div>
+            <div className="admin-dash-info-value">{stats.inactiveUsers}</div>
           </div>
-          <div className="ad-info-section">
-            <div className="ad-info-label">Inactive Admins</div>
-            <div className="ad-info-value">{stats.inactiveAdmins}</div>
+          <div className="admin-dash-info-section">
+            <div className="admin-dash-info-label">Inactive Admins</div>
+            <div className="admin-dash-info-value">{stats.inactiveAdmins}</div>
           </div>
         </div>
       </div>
@@ -140,26 +140,28 @@ const AdminDashboard = () => {
   const AdminAnalyticsCard = () => (
     <>
       {(summary || graphs) && (
-        <div className="ad-analytics-wrapper">
-          <h2 className="ad-analytics-title">Website Analytics Overview</h2>
+        <div className="admin-dash-analytics-wrapper">
+          <h2 className="admin-dash-analytics-title">
+            Website Analytics Overview
+          </h2>
 
           {summary && (
-            <div className="ad-summary-cards">
-              <div className="ad-summary-card">
+            <div className="admin-dash-summary-cards">
+              <div className="admin-dash-summary-card">
                 <div className="label">Lifetime Revenue</div>
                 <div className="value">
                   ₹{summary.totalRevenue?.toLocaleString()}
                 </div>
               </div>
 
-              <div className="ad-summary-card">
+              <div className="admin-dash-summary-card">
                 <div className="label">Avg Order Value</div>
                 <div className="value">
                   ₹{summary.averageOrderValue?.toFixed(2)}
                 </div>
               </div>
 
-              <div className="ad-summary-card">
+              <div className="admin-dash-summary-card">
                 <div className="label">Products Sold</div>
                 <div className="value">{summary.totalProductsSold}</div>
               </div>
@@ -169,13 +171,13 @@ const AdminDashboard = () => {
           {graphs && (
             <>
               <h3
-                className="ad-analytics-title"
+                className="admin-dash-analytics-title"
                 style={{ fontSize: "1.4rem", marginTop: "2rem" }}
               >
                 Monthly Trends
               </h3>
-              <div className="ad-graphs-container">
-                <div className="ad-graph">
+              <div className="admin-dash-graphs-container">
+                <div className="admin-dash-graph">
                   <h3>Monthly Revenue</h3>
                   <Line
                     data={{
@@ -197,7 +199,7 @@ const AdminDashboard = () => {
                   />
                 </div>
 
-                <div className="ad-graph">
+                <div className="admin-dash-graph">
                   <h3>Products Sold per Month</h3>
                   <Bar
                     data={{
@@ -216,7 +218,7 @@ const AdminDashboard = () => {
                   />
                 </div>
 
-                <div className="ad-graph">
+                <div className="admin-dash-graph">
                   <h3>Users Onboarded Monthly</h3>
                   <Bar
                     data={{
@@ -235,7 +237,7 @@ const AdminDashboard = () => {
                   />
                 </div>
 
-                <div className="ad-graph">
+                <div className="admin-dash-graph">
                   <h3>Products per Category</h3>
                   <Bar
                     data={{
@@ -263,13 +265,13 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="ad-page">
+    <div className="admin-dash-page">
       <AdminHeader />
 
-      <div className="ad-container">
+      <div className="admin-dash-container">
         {alertStats && <AdminInfoCard stats={alertStats} />}
 
-        <div className="ad-cards">
+        <div className="admin-dash-cards">
           <Card
             icon={<AiFillProduct />}
             title="Products"
@@ -296,16 +298,16 @@ const AdminDashboard = () => {
           />
         </div>
 
-        <div className="ad-product">
-          <div className="ad-product-heading">
-            <h2 className="ad-product-heading-title">New Product</h2>
-            <p className="ad-product-heading-desc">
+        <div className="admin-dash-product">
+          <div className="admin-dash-product-heading">
+            <h2 className="admin-dash-product-heading-title">New Product</h2>
+            <p className="admin-dash-product-heading-desc">
               Want to add a new product?
             </p>
           </div>
           <button
             onClick={() => navigate("/add-product")}
-            className="ad-product-button"
+            className="admin-dash-product-button"
           >
             Click Here <FaArrowRight />
           </button>

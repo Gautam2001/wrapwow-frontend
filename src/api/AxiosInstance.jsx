@@ -18,6 +18,7 @@ AxiosInstance.interceptors.request.use(
       "/member/sendOtp",
       "/member/validateOtp",
       "/member/forgotPassword",
+      "/member/contactUs",
     ];
 
     if (!allowedUrls.some((url) => config.url.includes(url)) && !token) {
