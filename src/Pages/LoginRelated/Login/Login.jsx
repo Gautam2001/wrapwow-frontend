@@ -14,10 +14,10 @@ const Login = () => {
   const [credentialsPopup, setCredentialsPopup] = useState(false);
 
   const usercredentials = `Username: user@wrapwow.com
-  Password: Gautam1234!`;
+  Password: User@1234`;
 
   const admincredentials = `Username: admin@wrapwow.com
-  Password: 1234567890`;
+  Password: Admin@1234`;
 
   useEffect(() => {
     sessionStorage.clear();
