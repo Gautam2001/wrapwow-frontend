@@ -182,6 +182,7 @@ const AddProduct = () => {
   };
 
   const HandleAddProduct = async () => {
+    showLoader();
     const product = previewData;
     const {
       email,
@@ -239,6 +240,7 @@ const AddProduct = () => {
         showPopup(result.result, "error");
       } else {
         showPopup("Product added Successfully.", "success");
+        hideLoader();
         navigate("/admin-dashboard");
       }
     } catch {
