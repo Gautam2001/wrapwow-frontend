@@ -253,7 +253,7 @@
 
 .admin-dash-graphs-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 30px;
   width: 100%;
 }
@@ -343,5 +343,11 @@
 
   .admin-dash-graphs {
     width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-dash-graphs-container {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
