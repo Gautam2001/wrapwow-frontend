@@ -30,8 +30,15 @@ import AboutUs from "./Pages/SupportPages/FooterPages/AboutUs";
 import FAQs from "./Pages/SupportPages/FooterPages/FAQs";
 import ContactDeveloper from "./Pages/SupportPages/ContactDeveloper";
 import ResetPassword from "./Pages/LoginRelated/ResetPassword/ResetPassword";
+import Maintenance from "./Pages/Down/Maintenance";
+
+const isMaintenance = import.meta.env.VITE_MAINTENANCE_MODE === "true";
 
 const App = () => {
+  if (isMaintenance) {
+    return <Maintenance />;
+  }
+
   return (
     <LoadingProvider>
       <GlobalPopupProvider>
