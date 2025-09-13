@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BrandLogo from "../../../Assets/GiftersLogo.png";
 import "./OtpVerification.css";
 import { useNavigate } from "react-router-dom";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 
 const OtpVerification = () => {
@@ -32,10 +32,10 @@ const OtpVerification = () => {
         showPopup(response.data.mesage, "error");
         return;
       }
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "0") {
+        showPopup(result.message, "error");
         return;
       } else {
         showPopup("OTP : " + result.OTP, "success");
@@ -71,13 +71,13 @@ const OtpVerification = () => {
         showPopup(response.data.mesage, "error");
         return;
       }
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "0") {
+        showPopup(result.message, "error");
         return;
       } else {
-        showPopup(result.result, "success");
+        showPopup(result.message, "success");
         setShowOtp(false);
         navigate("/forgot-password", { state: { email } });
       }

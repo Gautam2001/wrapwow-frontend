@@ -6,7 +6,7 @@ import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import UserFooter from "../../HeaderFooters/User/UserFooter";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 
 const ResetPassword = () => {
   const { showPopup } = usePopup();
@@ -56,16 +56,16 @@ const ResetPassword = () => {
     }
 
     try {
-      const email = loginData?.email;
+      const email = loginData?.username;
       const response = await AxiosInstance.post("/member/resetPassword", {
         email,
         oldPassword: form.currentPassword,
         password: form.confirmPassword,
       });
 
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "0") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Thank you, for the Feedback!", "success");
       }
@@ -96,7 +96,7 @@ const ResetPassword = () => {
             <label>Email</label>
             <input
               type="email"
-              value={loginData?.email || ""}
+              value={loginData?.username || ""}
               readOnly
               className="readonly"
             />

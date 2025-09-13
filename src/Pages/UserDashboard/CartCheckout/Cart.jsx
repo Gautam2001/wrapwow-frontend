@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Cart.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import UserHeader from "../../HeaderFooters/User/UserHeader";
@@ -8,9 +8,11 @@ import UserFooter from "../../HeaderFooters/User/UserFooter";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [cart, setCart] = useState([]);
@@ -20,15 +22,15 @@ const Cart = () => {
   const fetchCart = useCallback(async () => {
     showLoader();
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.get("/user/getCart", {
+      const response = await wrapwowApi.get("/user/getCart", {
         params: { email },
       });
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
         setCart([]);
         window.dispatchEvent(new CustomEvent("cartUpdated"));
       } else {
@@ -53,18 +55,18 @@ const Cart = () => {
 
   const updateCartQuantity = async (cartId, quantity) => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.post("/user/updateCartQty", {
+      const response = await wrapwowApi.post("/user/updateCartQty", {
         email,
         cartId,
         quantity,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Cart updated", "success");
         fetchCart();

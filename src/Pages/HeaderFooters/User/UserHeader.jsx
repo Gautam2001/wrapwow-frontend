@@ -3,11 +3,13 @@ import { FaUser, FaSignOutAlt, FaShoppingCart } from "react-icons/fa";
 import BrandLogo from "../../../Assets/GiftersLogoW.png";
 import "./UserHeader.css";
 import { useNavigate } from "react-router-dom";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
+import { useApiClients } from "../../../api/useApiClients";
 
 const UserHeader = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const [showDropdown, setShowDropdown] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -26,15 +28,15 @@ const UserHeader = () => {
   useEffect(() => {
     const fetchCartQty = async () => {
       const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-      const email = loginData?.email;
+      const email = loginData?.username;
 
       try {
-        const response = await AxiosInstance.get("/user/getCartQty", {
+        const response = await wrapwowApi.get("/user/getCartQty", {
           params: { email },
         });
-        const result = response.data.resultString;
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        const result = response.data;
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           setCartCount(result.CartQty);
         }

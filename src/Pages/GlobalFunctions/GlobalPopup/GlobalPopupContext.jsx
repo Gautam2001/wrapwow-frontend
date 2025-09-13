@@ -1,4 +1,11 @@
-import React, { createContext, useState, useContext, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+} from "react";
+import { PopupEventBus } from "./PopupEventBus";
 
 const GlobalPopupContext = createContext();
 
@@ -25,6 +32,12 @@ export const GlobalPopupProvider = ({ children }) => {
   const closePopup = () => {
     setPopup({ show: false, message: "", type: "success" });
   };
+
+  useEffect(() => {
+    const listener = (message, type) => showPopup(message, type);
+    PopupEventBus.on(listener);
+    return () => PopupEventBus.off(listener);
+  }, []);
 
   return (
     <GlobalPopupContext.Provider value={{ showPopup, closePopup }}>

@@ -13,13 +13,15 @@ import UserFooter from "../HeaderFooters/User/UserFooter";
 import AdminHeader from "../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../HeaderFooters/Admin/AdminFooter";
 import { usePopup } from "../GlobalFunctions/GlobalPopup/GlobalPopupContext";
-import AxiosInstance from "../../api/AxiosInstance";
+//import AxiosInstance from "../../api/AxiosInstance";
 import Breadcrumbs from "../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../api/useApiClients";
 
 const ContactDeveloper = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
 
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
 
   const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
@@ -58,13 +60,13 @@ const ContactDeveloper = () => {
       return;
     }
     try {
-      const response = await AxiosInstance.post("/member/contactUs", {
+      const response = await wrapwowApi.post("/member/contactUs", {
         ...form,
       });
 
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Thank you, for the Feedback!", "success");
       }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayProduct.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { useLocation, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import UserHeader from "../../HeaderFooters/User/UserHeader";
@@ -8,12 +8,14 @@ import UserFooter from "../../HeaderFooters/User/UserFooter";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const DisplayProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const productId = location.state?.productId;
 
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
 
@@ -44,13 +46,13 @@ const DisplayProduct = () => {
     const fetchProduct = async () => {
       showLoader();
       try {
-        const response = await AxiosInstance.get(
+        const response = await wrapwowApi.get(
           `/user/getProductById?productId=${productId}`
         );
-        const result = response.data.resultString;
+        const result = response.data;
 
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           const data = result.Product;
           setProduct(data);
@@ -92,19 +94,19 @@ const DisplayProduct = () => {
 
   const handleAddToCart = async () => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.post("/user/addUpdateToCart", {
+      const response = await wrapwowApi.post("/user/addUpdateToCart", {
         email,
         productId: product.productId,
         priceId: formData.selectedPrice.priceId,
         quantity: formData.quantity,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Product Added to cart.", "success");
         window.dispatchEvent(new CustomEvent("cartUpdated"));

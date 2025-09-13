@@ -5,12 +5,13 @@ import AdminFooter from "../HeaderFooters/Admin/AdminFooter";
 import { FaArrowRight, FaUser, FaUserShield } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { MdCategory } from "react-icons/md";
-import AxiosInstance from "../../api/AxiosInstance";
+//import AxiosInstance from "../../api/AxiosInstance";
 import { Bar, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import "./AdminDashboard.css";
 import { usePopup } from "../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../GlobalFunctions/GlobalLoader/LoadingContext";
+import { useApiClients } from "../../api/useApiClients";
 
 Chart.register(...registerables);
 
@@ -58,6 +59,7 @@ const AdminInfoCard = ({ stats }) => (
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [alertStats, setAlertStats] = useState(null);
@@ -93,14 +95,17 @@ const AdminDashboard = () => {
       showLoader();
       try {
         const [alertRes, summaryRes, graphsRes] = await Promise.all([
-          AxiosInstance.get("/admin/getAlertData"),
-          AxiosInstance.get("/admin/analytics/summary"),
-          AxiosInstance.get("/admin/analytics/graphs"),
+          wrapwowApi.get("/admin/getAlertData"),
+          wrapwowApi.get("/admin/analytics/summary"),
+          wrapwowApi.get("/admin/analytics/graphs"),
         ]);
 
-        const alertData = alertRes.data.resultString;
-        if (alertData.resultStatus === "0") {
-          showPopup(alertData.result || "Unable to fetch alert data.", "error");
+        const alertData = alertRes.data;
+        if (alertData.status === "1") {
+          showPopup(
+            alertData.message || "Unable to fetch alert data.",
+            "error"
+          );
         } else {
           setAlertStats({
             outOfStockQty: alertData.outOfStockQty || 0,
@@ -110,13 +115,10 @@ const AdminDashboard = () => {
           });
         }
 
-        const summaryData = summaryRes.data.resultString;
-        const graphData = graphsRes.data.resultString;
+        const summaryData = summaryRes.data;
+        const graphData = graphsRes.data;
 
-        if (
-          summaryData.resultStatus === "0" ||
-          graphData.resultStatus === "0"
-        ) {
+        if (summaryData.status === "1" || graphData.status === "1") {
           showPopup("Failed to fetch analytics data.", "error");
         } else {
           setSummary(summaryData);

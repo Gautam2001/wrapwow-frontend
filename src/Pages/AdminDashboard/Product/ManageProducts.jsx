@@ -3,14 +3,16 @@ import "./ManageProducts.css";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import { FaSort } from "react-icons/fa";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const ManageProducts = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup;
   const { showLoader, hideLoader } = useLoading();
   const [products, setProducts] = useState([]);
@@ -35,10 +37,10 @@ const ManageProducts = () => {
   const fetchProducts = useCallback(async () => {
     showLoader();
     try {
-      const response = await AxiosInstance.get("/admin/getProductList");
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const response = await wrapwowApi.get("/admin/getProductList");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const data = result.Products;
         if (Array.isArray(data)) {
@@ -95,17 +97,17 @@ const ManageProducts = () => {
 
   const updateProductStatus = async (ids) => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.post("/admin/updateProductsStatus", {
+      const response = await wrapwowApi.post("/admin/updateProductsStatus", {
         email,
         ids,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Status updated successfully", "success");
         fetchProducts();

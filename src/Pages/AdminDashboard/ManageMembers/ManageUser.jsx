@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./ManageUser.css";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { FaSort } from "react-icons/fa";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const ManageUser = () => {
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [users, setUsers] = useState([]);
@@ -30,11 +32,11 @@ const ManageUser = () => {
   const fetchUsers = useCallback(async () => {
     showLoader();
     try {
-      const response = await AxiosInstance.get("/admin/getUsers");
-      const result = response.data.resultString;
+      const response = await wrapwowApi.get("/admin/getUsers");
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const data = result.Users;
         if (Array.isArray(data)) {
@@ -78,17 +80,17 @@ const ManageUser = () => {
 
   const updateUserStatus = async (ids) => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.post("/admin/updateUsersStatus", {
+      const response = await wrapwowApi.post("/admin/updateUsersStatus", {
         email,
         ids,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Status updated successfully", "success");
         fetchUsers();

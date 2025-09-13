@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Categories.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import { FaArrowRight } from "react-icons/fa";
@@ -8,8 +8,10 @@ import CategoryPopup from "./CategoriesPopup";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const Categories = () => {
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup;
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
@@ -25,10 +27,10 @@ const Categories = () => {
   const fetchCategories = useCallback(async () => {
     showLoader();
     try {
-      const response = await AxiosInstance.get("/member/getCategories");
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const response = await wrapwowApi.get("/member/getCategories");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const data = result.Categories;
         if (Array.isArray(data)) {
@@ -88,7 +90,7 @@ const Categories = () => {
     e.preventDefault();
 
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     const formDataToSend = new FormData();
 
@@ -100,7 +102,7 @@ const Categories = () => {
         formDataToSend.append("category", formData.category);
         formDataToSend.append("Image", formData.image);
 
-        response = await AxiosInstance.post(
+        response = await wrapwowApi.post(
           "/admin/updateCategory",
           formDataToSend,
           {
@@ -112,18 +114,14 @@ const Categories = () => {
         formDataToSend.append("category", formData.category);
         formDataToSend.append("image", formData.image);
 
-        response = await AxiosInstance.post(
-          "/admin/addCategory",
-          formDataToSend,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        );
+        response = await wrapwowApi.post("/admin/addCategory", formDataToSend, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
       }
 
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        setError(result.result);
+      const result = response.data;
+      if (result.status === "1") {
+        setError(result.message);
       } else {
         setPopupOpen(false);
         setSelectedCategory(null);
@@ -138,18 +136,18 @@ const Categories = () => {
     e.preventDefault();
 
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     setError("");
     try {
-      const response = await AxiosInstance.post("/admin/updateCategoryStatus", {
+      const response = await wrapwowApi.post("/admin/updateCategoryStatus", {
         email,
         id: selectedCategory.categoryId,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        setError(result.result);
+      if (result.status === "1") {
+        setError(result.message);
       } else {
         setPopupOpen(false);
         setSelectedCategory(null);

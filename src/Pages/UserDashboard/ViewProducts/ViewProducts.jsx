@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./ViewProducts.css";
 import SidebarFilter from "./SidebarFilter";
 import ProductGrid from "./ProductGrid";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import UserHeader from "../../HeaderFooters/User/UserHeader";
 import UserFooter from "../../HeaderFooters/User/UserFooter";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
+import { useApiClients } from "../../../api/useApiClients";
 
 const ViewProducts = () => {
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [filters, setFilters] = useState({
@@ -23,13 +25,13 @@ const ViewProducts = () => {
 
       try {
         const [categoryRes, productRes] = await Promise.all([
-          AxiosInstance.get("/member/getCategoryNames"),
-          AxiosInstance.get("/user/getProductList"),
+          wrapwowApi.get("/member/getCategoryNames"),
+          wrapwowApi.get("/user/getProductList"),
         ]);
 
-        const categoryResult = categoryRes.data.resultString;
-        if (categoryResult.resultStatus === "0") {
-          showPopup(categoryResult.result, "error");
+        const categoryResult = categoryRes.data;
+        if (categoryResult.status === "1") {
+          showPopup(categoryResult.message, "error");
         } else {
           const data = categoryResult.Categories;
           if (Array.isArray(data)) {
@@ -40,9 +42,9 @@ const ViewProducts = () => {
           }
         }
 
-        const productResult = productRes.data.resultString;
-        if (productResult.resultStatus === "0") {
-          showPopup(productResult.result, "error");
+        const productResult = productRes.data;
+        if (productResult.status === "1") {
+          showPopup(productResult.message, "error");
         } else {
           const data = productResult.Products;
           if (Array.isArray(data)) {

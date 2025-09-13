@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import "./AddProduct.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import ProductPreviewModal from "./ProductPreviewModal";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
@@ -32,11 +34,11 @@ const AddProduct = () => {
     showLoader();
     const fetchCategories = async () => {
       try {
-        const response = await AxiosInstance.get("/member/getCategoryNames");
-        const result = response.data.resultString;
+        const response = await wrapwowApi.get("/member/getCategoryNames");
+        const result = response.data;
 
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           const data = result.Categories;
           if (Array.isArray(data)) setCategories(data);
@@ -155,7 +157,7 @@ const AddProduct = () => {
 
   const prepareProductPreviewData = () => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     const priceList = formData.prices.map((p) => parseFloat(p.price));
     const discountList = formData.prices.map((p) => parseFloat(p.discount));
@@ -198,7 +200,7 @@ const AddProduct = () => {
     } = product;
 
     try {
-      const response = await AxiosInstance.post("/admin/addProduct", {
+      const response = await wrapwowApi.post("/admin/addProduct", {
         email,
         name,
         description,
@@ -210,9 +212,9 @@ const AddProduct = () => {
         quantity,
       });
 
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const productId = result.productId;
         await HandleImageAPI(productId, selectedFiles);
@@ -228,16 +230,16 @@ const AddProduct = () => {
     files.forEach((file) => formDataToSend.append("Images", file));
 
     try {
-      const response = await AxiosInstance.post(
+      const response = await wrapwowApi.post(
         "/admin/uploadImage",
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Product added Successfully.", "success");
         hideLoader();

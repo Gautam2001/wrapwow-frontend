@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./ManageAdmin.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import { FaSort } from "react-icons/fa";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const ManageAdmin = () => {
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [admins, setAdmins] = useState([]);
@@ -30,10 +32,10 @@ const ManageAdmin = () => {
   const fetchAdmins = useCallback(async () => {
     showLoader();
     try {
-      const response = await AxiosInstance.get("/admin/getAdmins");
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const response = await wrapwowApi.get("/admin/getAdmins");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const data = result.Admins;
         if (Array.isArray(data)) {
@@ -77,17 +79,17 @@ const ManageAdmin = () => {
 
   const updateAdminStatus = async (ids) => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     try {
-      const response = await AxiosInstance.post("/admin/updateAdminsStatus", {
+      const response = await wrapwowApi.post("/admin/updateAdminsStatus", {
         email,
         ids,
       });
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Status updated successfully", "success");
         fetchAdmins();

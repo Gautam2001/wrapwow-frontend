@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./LandingPage.css";
 import Carousel from "react-slick";
 import { FaArrowRight } from "react-icons/fa";
-import AxiosInstance from "../../api/AxiosInstance";
 import ad1 from "../../Assets/MMTAd.jpg";
 import ad2 from "../../Assets/LifestyleAd.png";
 import ad3 from "../../Assets/Ad1.jpg";
@@ -12,8 +11,10 @@ import LandingHeader from "../HeaderFooters/LandingPage/LandingHeader";
 import LandingFooter from "../HeaderFooters/LandingPage/LandingFooter";
 import { usePopup } from "../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../GlobalFunctions/GlobalLoader/LoadingContext";
+import { useApiClients } from "../../api/useApiClients";
 
 const LandingPage = () => {
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
@@ -47,11 +48,11 @@ const LandingPage = () => {
     const fetchLandingScreenData = async () => {
       showLoader(0);
       try {
-        const response = await AxiosInstance.get("/member/landingPageData");
-        const result = response.data.resultString;
+        const response = await wrapwowApi.get("/member/landingPageData");
+        const result = response.data;
 
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           const activeCategories = (result.Categories || []).filter(
             (category) => category.categoryStatus === "ACTIVE"

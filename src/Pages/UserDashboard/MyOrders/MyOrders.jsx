@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./MyOrders.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import UserHeader from "../../HeaderFooters/User/UserHeader";
 import UserFooter from "../../HeaderFooters/User/UserFooter";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const MyOrders = () => {
   const { showPopup } = usePopup();
+  const { wrapwowApi } = useApiClients();
   const { showLoader, hideLoader } = useLoading();
   const [orders, setOrders] = useState([]);
   const [expandedOrderId, setExpandedOrderId] = useState(null);
@@ -17,15 +19,15 @@ const MyOrders = () => {
     const fetchOrders = async () => {
       showLoader();
       const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-      const email = loginData?.email;
+      const email = loginData?.username;
 
       try {
-        const response = await AxiosInstance.get("/user/getOrders", {
+        const response = await wrapwowApi.get("/user/getOrders", {
           params: { email },
         });
-        const result = response.data.resultString;
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        const result = response.data;
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           setOrders(result.orders);
         }

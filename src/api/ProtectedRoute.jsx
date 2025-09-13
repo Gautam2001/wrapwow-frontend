@@ -5,9 +5,9 @@ const ProtectedRoute = ({ allowedRoles }) => {
     ? JSON.parse(sessionStorage.getItem("LoginData"))
     : null;
 
-  const token = loginData?.token;
+  const accessToken = loginData?.accessToken;
   const role = loginData?.role;
-  const isAuthenticated = !!token;
+  const isAuthenticated = !!accessToken;
   const location = useLocation();
 
   if (!isAuthenticated) {

@@ -3,16 +3,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AdminHeader from "../../HeaderFooters/Admin/AdminHeader";
 import AdminFooter from "../../HeaderFooters/Admin/AdminFooter";
 import "./UpdateProduct.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import ProductPreviewModal from "./ProductPreviewModal";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const productId = location.state?.productId;
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
@@ -41,11 +43,11 @@ const UpdateProduct = () => {
     const fetchData = async () => {
       showLoader();
       try {
-        const categoryRes = await AxiosInstance.get("/member/getCategoryNames");
-        const categoryResult = categoryRes.data.resultString;
+        const categoryRes = await wrapwowApi.get("/member/getCategoryNames");
+        const categoryResult = categoryRes.data;
 
-        if (categoryResult.resultStatus === "0") {
-          showPopup(categoryResult.result, "error");
+        if (categoryResult.status === "1") {
+          showPopup(categoryResult.message, "error");
           return;
         }
 
@@ -57,13 +59,13 @@ const UpdateProduct = () => {
 
         setCategories(categoryData);
 
-        const productRes = await AxiosInstance.get(
+        const productRes = await wrapwowApi.get(
           "/admin/getProductById?productId=" + productId
         );
-        const productResult = productRes.data.resultString;
+        const productResult = productRes.data;
 
-        if (productResult.resultStatus === "0") {
-          showPopup(productResult.result, "error");
+        if (productResult.status === "1") {
+          showPopup(productResult.message, "error");
           return;
         }
 
@@ -233,7 +235,7 @@ const UpdateProduct = () => {
 
   const prepareProductPreviewData = () => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     const priceList = formData.prices.map((p) => parseFloat(p.price));
     const discountList = formData.prices.map((p) => parseFloat(p.discount));
@@ -274,7 +276,7 @@ const UpdateProduct = () => {
     }
 
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    const email = loginData?.email;
+    const email = loginData?.username;
 
     const priceList = formData.prices.map((p) => parseFloat(p.price));
     const discountList = formData.prices.map((p) => parseFloat(p.discount));
@@ -282,7 +284,7 @@ const UpdateProduct = () => {
 
     try {
       showLoader();
-      const response = await AxiosInstance.post("/admin/updateProduct", {
+      const response = await wrapwowApi.post("/admin/updateProduct", {
         email,
         productId: formData.id,
         name: formData.title,
@@ -295,9 +297,9 @@ const UpdateProduct = () => {
         quantity: formData.quantity,
       });
 
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         const productId = result.productId;
         if (addedImages.length === 0 && deletedImages.length === 0) {
@@ -321,16 +323,16 @@ const UpdateProduct = () => {
     );
 
     try {
-      const response = await AxiosInstance.post(
+      const response = await wrapwowApi.post(
         "/admin/updateProductImage",
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
         showPopup("Product updated successfully", "success");
         navigate("/manage-products");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-slick";
 import { FaArrowRight } from "react-icons/fa";
 import "./UserDashboard.css";
-import AxiosInstance from "../../api/AxiosInstance";
+//import AxiosInstance from "../../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import ad1 from "../../Assets/MMTAd.jpg";
 import ad2 from "../../Assets/LifestyleAd.png";
@@ -13,9 +13,11 @@ import UserHeader from "../HeaderFooters/User/UserHeader";
 import UserFooter from "../HeaderFooters/User/UserFooter";
 import { usePopup } from "../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../GlobalFunctions/GlobalLoader/LoadingContext";
+import { useApiClients } from "../../api/useApiClients";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
+  const { wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const { showLoader, hideLoader } = useLoading();
   const [categories, setCategories] = useState([]);
@@ -46,14 +48,14 @@ const UserDashboard = () => {
       showLoader();
       try {
         const [categoryRes, bestSellingRes, expensiveRes] = await Promise.all([
-          AxiosInstance.get("/member/getCategories"),
-          AxiosInstance.get("/user/getBestSellingProductList"),
-          AxiosInstance.get("/user/getMostExpensiveProductList"),
+          wrapwowApi.get("/member/getCategories"),
+          wrapwowApi.get("/user/getBestSellingProductList"),
+          wrapwowApi.get("/user/getMostExpensiveProductList"),
         ]);
 
-        const catResult = categoryRes.data.resultString;
-        if (catResult.resultStatus === "0") {
-          showPopup(catResult.result, "error");
+        const catResult = categoryRes.data;
+        if (catResult.status === "1") {
+          showPopup(catResult.message, "error");
         } else {
           const data = catResult.Categories;
           if (Array.isArray(data)) {
@@ -64,9 +66,9 @@ const UserDashboard = () => {
           }
         }
 
-        const bestResult = bestSellingRes.data.resultString;
-        if (bestResult.resultStatus === "0") {
-          showPopup(bestResult.result, "error");
+        const bestResult = bestSellingRes.data;
+        if (bestResult.status === "1") {
+          showPopup(bestResult.message, "error");
         } else {
           const data = bestResult.Products;
           if (Array.isArray(data)) {
@@ -77,9 +79,9 @@ const UserDashboard = () => {
           }
         }
 
-        const expensiveResult = expensiveRes.data.resultString;
-        if (expensiveResult.resultStatus === "0") {
-          showPopup(expensiveResult.result, "error");
+        const expensiveResult = expensiveRes.data;
+        if (expensiveResult.status === "1") {
+          showPopup(expensiveResult.message, "error");
         } else {
           const data = expensiveResult.Products;
           if (Array.isArray(data)) {

@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Checkout.css";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import UserHeader from "../../HeaderFooters/User/UserHeader";
 import UserFooter from "../../HeaderFooters/User/UserFooter";
 import { useNavigate } from "react-router-dom";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import { useLoading } from "../../GlobalFunctions/GlobalLoader/LoadingContext";
 import Breadcrumbs from "../../GlobalFunctions/BackFunctionality/Breadcrumbs";
+import { useApiClients } from "../../../api/useApiClients";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { showPopup } = usePopup();
+  const { wrapwowApi } = useApiClients();
   const { showLoader, hideLoader } = useLoading();
   const [cart, setCart] = useState([]);
   const [email, setEmail] = useState("");
@@ -19,12 +21,12 @@ const Checkout = () => {
     async (email) => {
       showLoader();
       try {
-        const response = await AxiosInstance.get("/user/getCart", {
+        const response = await wrapwowApi.get("/user/getCart", {
           params: { email },
         });
-        const result = response.data.resultString;
-        if (result.resultStatus === "0") {
-          showPopup(result.result, "error");
+        const result = response.data;
+        if (result.status === "1") {
+          showPopup(result.message, "error");
         } else {
           setCart(result.Cart);
         }
@@ -44,8 +46,8 @@ const Checkout = () => {
 
   useEffect(() => {
     const loginData = JSON.parse(sessionStorage.getItem("LoginData"));
-    setEmail(loginData?.email || "");
-    fetchCart(loginData?.email);
+    setEmail(loginData?.username || "");
+    fetchCart(loginData?.username);
   }, [fetchCart]);
 
   const calculateSubtotal = () =>
@@ -66,7 +68,7 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     try {
-      const response = await AxiosInstance.post("/user/checkout", {
+      const response = await wrapwowApi.post("/user/checkout", {
         userEmail: email,
         totalAmount: calculateGrandTotal(),
         totalItems: calculateTotalItems(),
@@ -79,11 +81,11 @@ const Checkout = () => {
           totalPrice: item.price.finalPrice * item.quantity,
         })),
       });
-      const result = response.data.resultString;
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
+      const result = response.data;
+      if (result.status === "1") {
+        showPopup(result.message, "error");
       } else {
-        showPopup(result.result, "success");
+        showPopup(result.message, "success");
         navigate("/dashboard");
       }
     } catch (err) {

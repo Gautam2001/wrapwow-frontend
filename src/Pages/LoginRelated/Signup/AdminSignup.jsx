@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AdminSignup.css";
 import BrandLogo from "../../../Assets/GiftersLogoW.png";
 import { useNavigate } from "react-router-dom";
-import AxiosInstance from "../../../api/AxiosInstance";
+//import AxiosInstance from "../../../api/AxiosInstance";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 
 const AdminSignup = () => {
@@ -92,12 +92,12 @@ const AdminSignup = () => {
         role: "ADMIN",
       });
 
-      const result = response.data.resultString;
+      const result = response.data;
 
-      if (result.resultStatus === "0") {
-        showPopup(result.result || "Signup failed", "error");
+      if (result.status === "0") {
+        showPopup(result.message || "Signup failed", "error");
       } else {
-        showPopup(result.result || "Signup successful", "success");
+        showPopup(result.message || "Signup successful", "success");
         navigate("/login");
       }
     } catch {

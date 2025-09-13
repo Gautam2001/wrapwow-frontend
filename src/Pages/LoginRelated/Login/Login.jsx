@@ -2,69 +2,81 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import BrandLogo from "../../../Assets/GiftersLogo.png";
 import { useNavigate } from "react-router-dom";
-import AxiosInstance from "../../../api/AxiosInstance";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
 import CredentialsPopup from "./CredentialsPopup";
+import { useApiClients } from "../../../api/useApiClients";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { loginApi, wrapwowApi } = useApiClients();
   const { showPopup } = usePopup();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [credentialsPopup, setCredentialsPopup] = useState(false);
-
-  const usercredentials = `Username: user@wrapwow.com
-  Password: User@1234`;
-
-  const admincredentials = `Username: admin@wrapwow.com
-  Password: Admin@1234`;
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     sessionStorage.clear();
   }, []);
 
-  const HandleForgotPass = () => {
-    navigate("/otp-verification");
-  };
+  // const HandleForgotPass = () => {
+  //   navigate("/otp-verification");
+  // };
 
   const HandleLoginSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+    } catch (err) {
+      console.error("preventDefault failed", err);
+      return;
+    }
 
     if (!email.trim() || !password.trim()) {
       showPopup("All fields are required.", "error");
       return;
     }
 
+    setStatus("loading");
+
     try {
-      const response = await AxiosInstance.post("/member/login", {
+      const res = await wrapwowApi.post("/member/exists", {
         email,
-        password,
       });
+      const data = res.data;
 
-      if (response.data.status === "0") {
-        showPopup(response.data.mesage, "error");
-        return;
-      }
+      if (data.status === "0") {
+        //continue to login
+        const loginRes = await loginApi.post("/auth/login", {
+          username: email,
+          password,
+        });
+        const loginData = {
+          ...res.data,
+          ...loginRes.data,
+        };
 
-      const result = response.data.resultString;
-
-      if (result.resultStatus === "0") {
-        showPopup(result.result, "error");
-        return;
+        if (loginData.status === "0") {
+          showPopup(loginData.message || "Login successful!", "success");
+          sessionStorage.setItem(
+            "LoginData",
+            JSON.stringify(loginData, null, 2)
+          );
+          console.log("LoginData : " + sessionStorage.getItem("LoginData"));
+          navigate(
+            loginData.role === "ADMIN" ? "/admin-dashboard" : "/dashboard"
+          );
+        } else {
+          showPopup(loginData.message || "Something went wrong.", "error"); //proceed  for signup
+        }
       } else {
-        sessionStorage.setItem("LoginData", JSON.stringify(result, null, 2));
-        showPopup("Login successful!", "success");
-
-        console.log("LoginData : " + JSON.stringify(result, null, 2));
-
-        navigate(result.role === "ADMIN" ? "/admin-dashboard" : "/dashboard");
+        //user does not exists in wrap-wow table
+        showPopup(data.message || "Something went wrong.", "error"); //proceed for join
       }
     } catch (err) {
-      if (err.response) {
-        showPopup("Login failed. Please try again.", "error");
-      } else {
-        showPopup("An error occurred. Please check your connection.", "error");
-      }
+      const message =
+        err.response?.data?.message || "Network error. Please try again later.";
+      showPopup(message, "error");
+    } finally {
+      setStatus("");
     }
   };
 
@@ -102,33 +114,21 @@ const Login = () => {
             />
           </div>
           <div className="login-buttons">
-            <button className="login-submit-button" type="submit">
-              Login
-            </button>
             <button
+              className="login-submit-button"
+              type="submit"
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Logging In..." : "Login"}
+            </button>
+            {/* <button
               className="login-forgotpass-button"
               type="button"
               onClick={HandleForgotPass}
             >
               Forgot Password
-            </button>
+            </button> */}
           </div>
-          <div className="login-button">
-            <button
-              className="login-credential-button"
-              type="button"
-              onClick={() => setCredentialsPopup(true)}
-            >
-              Get Credentials
-            </button>
-          </div>
-          {credentialsPopup && (
-            <CredentialsPopup
-              user={usercredentials}
-              admin={admincredentials}
-              onClose={() => setCredentialsPopup(false)}
-            />
-          )}
         </form>
       </div>
     </div>
