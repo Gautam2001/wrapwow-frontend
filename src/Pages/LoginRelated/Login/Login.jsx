@@ -3,7 +3,6 @@ import "./Login.css";
 import BrandLogo from "../../../Assets/GiftersLogo.png";
 import { useNavigate } from "react-router-dom";
 import { usePopup } from "../../GlobalFunctions/GlobalPopup/GlobalPopupContext";
-import CredentialsPopup from "./CredentialsPopup";
 import { useApiClients } from "../../../api/useApiClients";
 
 const Login = () => {
@@ -17,10 +16,6 @@ const Login = () => {
   useEffect(() => {
     sessionStorage.clear();
   }, []);
-
-  // const HandleForgotPass = () => {
-  //   navigate("/otp-verification");
-  // };
 
   const HandleLoginSubmit = async (e) => {
     try {
@@ -89,6 +84,7 @@ const Login = () => {
             alt="Gift Carders Logo"
             className="login-brand-logo"
           />
+          <p>A GIFTING RETREAT</p>
         </div>
         <form onSubmit={HandleLoginSubmit}>
           <h2 className="login-title">LOGIN</h2>
@@ -113,21 +109,20 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="login-buttons">
-            <button
-              className="login-submit-button"
-              type="submit"
-              disabled={status === "loading"}
-            >
-              {status === "loading" ? "Logging In..." : "Login"}
-            </button>
-            {/* <button
-              className="login-forgotpass-button"
-              type="button"
-              onClick={HandleForgotPass}
-            >
-              Forgot Password
-            </button> */}
+          <button
+            className="login-submit-button"
+            type="submit"
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? "Logging In..." : "Login"}
+          </button>
+          <div className="login-footer">
+            <p>
+              <a href="/forgot-password">Forgot Password?</a>
+            </p>
+            <p>
+              Become a member? <a href="/signup">Sign up here</a>
+            </p>
           </div>
         </form>
       </div>

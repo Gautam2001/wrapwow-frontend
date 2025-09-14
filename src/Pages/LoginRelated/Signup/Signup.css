@@ -1,4 +1,4 @@
-.login-page {
+.signup-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@
   overflow-y: scroll;
 }
 
-.login-container {
+.signup-container {
   text-align: center;
   width: 90%;
   max-width: 350px;
@@ -22,21 +22,21 @@
   transition: all 0.3s ease-in-out;
 }
 
-.login-brand-title {
+.signup-brand-title {
   margin-bottom: 20px;
 }
 
-.login-brand-title p {
+.signup-brand-title p {
   margin: 5px 0 0 0;
   font-weight: lighter;
 }
 
-.login-brand-logo {
+.signup-brand-logo {
   height: 75px;
   width: auto;
 }
 
-.login-title {
+.signup-title {
   margin: 0;
   font-size: 20px;
   font-weight: lighter;
@@ -45,7 +45,7 @@
   margin-bottom: 15px;
 }
 
-.login-label {
+.signup-label {
   display: block;
   text-align: left;
   font-size: 0.9rem;
@@ -55,7 +55,7 @@
   margin-left: 10px;
 }
 
-.login-field {
+.signup-field {
   width: 90%;
   padding: 12px 16px;
   font-size: 1rem;
@@ -67,13 +67,13 @@
   outline: none;
 }
 
-.login-field:focus {
+.signup-field:focus {
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
-.login-submit-button {
+.signup-button {
   margin-top: 10px;
   width: 60%;
   padding: 12px;
@@ -86,32 +86,28 @@
   transition: background-color 0.3s;
 }
 
-.login-submit-button:disabled {
+.signup-button:disabled {
   background-color: #a6c8f0;
   cursor: wait;
 }
 
-.login-submit-button:hover:not(:disabled) {
+.signup-button:hover:not(:disabled) {
   background-color: #357abf;
 }
 
-.login-footer {
+.signup-footer {
   margin-top: 1rem;
   font-size: 0.85rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
-.login-footer p {
-  margin: 5px;
-}
-
-.login-footer a {
+.signup-footer a {
   color: #4a90e2;
   text-decoration: none;
 }
 
-.login-footer a:hover {
+.signup-footer a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }

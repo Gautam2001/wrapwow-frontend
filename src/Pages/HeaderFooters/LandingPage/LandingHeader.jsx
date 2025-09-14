@@ -40,9 +40,8 @@ const LandingHeader = () => {
 
           {showDropdown && (
             <div className="lh-dropdown" ref={dropdownRef}>
-              <p onClick={() => navigate("/login")}>Sign In</p>
+              <p onClick={() => navigate("/login")}>Log In</p>
               <p onClick={() => navigate("/signup")}>Sign Up</p>
-              <p onClick={() => navigate("/admin-signup")}>Onboard Admin</p>
             </div>
           )}
         </div>
