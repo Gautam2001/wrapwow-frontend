@@ -83,7 +83,7 @@
 .ah-dropdown {
   position: absolute;
   top: 35px;
-  right: -18px;
+  right: 8px;
   background-color: white;
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

@@ -85,7 +85,6 @@ const RequestSignup = () => {
       const message =
         err.response?.data?.message || "Network error. Please try again.";
       showPopup(message, "error");
-      console.log(err);
     } finally {
       setStatus("");
     }

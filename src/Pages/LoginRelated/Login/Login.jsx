@@ -55,7 +55,7 @@ const Login = () => {
             "LoginData",
             JSON.stringify(loginData, null, 2)
           );
-          console.log("LoginData : " + sessionStorage.getItem("LoginData"));
+          // console.log("LoginData : " + sessionStorage.getItem("LoginData"));
           navigate(
             loginData.role === "ADMIN" ? "/admin-dashboard" : "/dashboard"
           );

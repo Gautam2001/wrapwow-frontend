@@ -303,8 +303,8 @@
     gap: 30px;
   }
 
-  .dp-sub-container {
-    width: 100%;
+  .dp-sub-conatiner {
+    width: 90%;
     margin: auto;
   }
 
@@ -348,6 +348,10 @@
 
 /* Mobile screens */
 @media (max-width: 600px) {
+  .dp-sub-conatiner {
+    width: 90%;
+    margin: auto;
+  }
   .dp-title {
     font-size: 26px;
     text-align: center;
